@@ -1,13 +1,13 @@
-public class producto{
-    private String id;
+public class Producto{
+    private String idef;
     private String name;
     private double price;
     private boolean disponibilidad;
-    public String getId() {
-        return id;
+    public String getIdef() {
+        return idef;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setIdef(String idef) {
+        this.idef = idef;
     }
     public String getName() {
         return name;
@@ -27,11 +27,10 @@ public class producto{
     public void setDisponibilidad(boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
-    public producto(String id, String name, double price, boolean disponibilidad) {
-        this.id = id;
+    public Producto(String idef, String name, double price, boolean disponibilidad) {
+        this.idef = idef;
         this.name = name;
         this.price = price;
         this.disponibilidad = disponibilidad;
-    }
-
+    } 
 }
