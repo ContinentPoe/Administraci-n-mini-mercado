@@ -1,6 +1,6 @@
 public class Administrador extends persona {
     
-    String contraseña;
+    private String contraseña;
 
     public Administrador(int tipoAcceso, String nombre, String idPersona, String contraseña) {
         super(tipoAcceso, nombre, idPersona);
