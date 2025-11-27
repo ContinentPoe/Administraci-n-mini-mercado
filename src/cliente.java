@@ -4,7 +4,8 @@ public class cliente extends persona {
 
     public cliente(int tipoAcceso, String nombre, String idPersona) {
         super(tipoAcceso, nombre, idPersona);
-        this.puntosCliente = 0; // corregido
+        this.puntosCliente = 0; //gracias por ayudarme
+        /*de nada :D */
     }
 
     public int getPuntosCliente() {
