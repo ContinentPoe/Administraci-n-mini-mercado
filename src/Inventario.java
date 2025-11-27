@@ -7,7 +7,7 @@ public class Inventario {
 
     public Inventario(ArrayList<Producto> productos) {
         this.productos = productos;
-    }
+    }//hey
 
     public ArrayList<Producto> getProductos() {
         return productos;
