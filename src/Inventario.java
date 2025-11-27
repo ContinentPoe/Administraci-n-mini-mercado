@@ -91,14 +91,15 @@ public class Inventario {
             return;
         }
 
-        StringBuilder lista = new StringBuilder("Productos disponibles:\n\n");
-        for (Producto p : productos) {
-            lista.append("- ").append(p.getIdef())
-                    .append(" | ").append(p.getName())
-                    .append(" | $").append(p.getPrice())
-                    .append(" | Unidades: ").append(p.getCantidad())
-                    .append("\n");
-        }
+        String lista = "Productos disponibles:\n\n";
+
+for (Producto p : productos) {
+    lista = lista + "- " + p.getIdef()
+            + " | " + p.getName()
+            + " | $" + p.getPrice()
+            + " | Unidades: " + p.getCantidad()
+            + "\n";
+}
 
         String id = JOptionPane.showInputDialog(lista + "\nID del producto a vender:");
         if (id == null) return;
