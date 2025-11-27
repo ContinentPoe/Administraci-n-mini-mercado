@@ -22,7 +22,7 @@ public class principal {
 
         while (true) {
 
-            inventario.alertarBajos(); // alerta en cada ciclo
+            inventario.alertarBajos();
 
             String opc = JOptionPane.showInputDialog(
                     "===== SISTEMA DE TIENDA =====\n" +
@@ -32,27 +32,30 @@ public class principal {
                     "Seleccione opción:"
             );
 
-            if (opc == null) break;
+            if (opc == null) continue;
 
             switch (opc) {
                 case "1":
                     loginAdmin(administradores, clientes, inventario, trabajadores);
                     break;
+
                 case "2":
                     menuTrabajador(clientes, inventario);
                     break;
+
                 case "3":
                     System.exit(0);
                     break;
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opción inválida");
             }
         }
     }
 
-    /*para hacerle inicio al admin con el log in */
-
-    public static void loginAdmin(ArrayList<Administrador> admins, ArrayList<cliente> clientes,Inventario inventario, ArrayList<Trabajador> trabajadores) {
+    // LOGIN ADMINISTRADOR
+    public static void loginAdmin(ArrayList<Administrador> admins, ArrayList<cliente> clientes,
+                                  Inventario inventario, ArrayList<Trabajador> trabajadores) {
 
         String id = JOptionPane.showInputDialog("Digite ID de administrador:");
         if (id == null) return;
@@ -66,11 +69,11 @@ public class principal {
                 return;
             }
         }
+
         JOptionPane.showMessageDialog(null, "Datos incorrectos");
     }
 
-/*menú para los administradores */
-
+    // MENÚ ADMINISTRADOR
     public static void menuAdmin(ArrayList<Administrador> admins, ArrayList<cliente> clientes,
                                  Inventario inventario, ArrayList<Trabajador> trabajadores) {
 
@@ -88,30 +91,29 @@ public class principal {
                     "6. Volver"
             );
 
-            if (op == null) return;
+            if (op == null) continue;
 
             switch (op) {
 
-                /*registramos trabajador */
-                
                 case "1":
                     String nombT = JOptionPane.showInputDialog("Nombre del trabajador:");
                     if (nombT == null || nombT.trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Nombre inválido.");
-                        break;
+                        continue;
                     }
 
                     String idT = JOptionPane.showInputDialog("ID del trabajador:");
                     if (idT == null || idT.trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "ID inválido.");
-                        break;
+                        continue;
                     }
 
                     int horas = 0;
                     boolean validoH = false;
                     while (!validoH) {
                         String h = JOptionPane.showInputDialog("Horas trabajadas:");
-                        if (h == null) return;
+                        if (h == null) break;
+
                         try {
                             horas = Integer.parseInt(h);
                             validoH = true;
@@ -128,82 +130,61 @@ public class principal {
                     JOptionPane.showMessageDialog(null, "Trabajador registrado correctamente.");
                     break;
 
-                /*regitrar producto */
-
                 case "2":
                     inventario.registrarProducto();
                     break;
 
-                /*regstarr administrador */
-                
                 case "3":
                     String nombA = JOptionPane.showInputDialog("Nombre del administrador:");
-                    if (nombA == null || nombA.trim().isEmpty()) break;
+                    if (nombA == null || nombA.trim().isEmpty()) continue;
 
                     String idA = JOptionPane.showInputDialog("ID del administrador:");
-                    if (idA == null || idA.trim().isEmpty()) break;
+                    if (idA == null || idA.trim().isEmpty()) continue;
 
                     String contra = JOptionPane.showInputDialog("Contraseña:");
-                    if (contra == null || contra.trim().isEmpty()) break;
+                    if (contra == null || contra.trim().isEmpty()) continue;
 
                     admins.add(new Administrador(1, nombA, idA, contra));
                     JOptionPane.showMessageDialog(null, "Administrador registrado correctamente.");
                     break;
-
-                /*mostrar prodcutos */
 
                 case "4":
                     if (inventario.getProductos().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay productos registrados.");
                         break;
                     }
-//jeje
-/*de qué te ries */
-//nada
 
                     String listaP = "PRODUCTOS REGISTRADOS:\n\n";
 
                     for (Producto p : inventario.getProductos()) {
-
-                    listaP = listaP + "- ID: " + p.getIdef()
-                    + " | Nombre: " + p.getName()
-                    + " | Precio: $" + p.getPrice()
-                    + " | Cantidad: " + p.getCantidad()
-                    + "\n";
+                        listaP += "- ID: " + p.getIdef()
+                                + " | Nombre: " + p.getName()
+                                + " | Precio: $" + p.getPrice()
+                                + " | Cantidad: " + p.getCantidad()
+                                + "\n";
                     }
 
-JOptionPane.showMessageDialog(null, listaP);
-
-                    JOptionPane.showMessageDialog(null, listaP.toString());
+                    JOptionPane.showMessageDialog(null, listaP);
                     break;
 
-                //mostrar trabajadores
-                
                 case "5":
                     if (trabajadores.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "No hay trabajadores registrados.");
                         break;
                     }
 
-                    StringBuilder listaT = new StringBuilder("TRABAJADORES REGISTRADOS:\n\n");
-
-                    String listaT = "";
+                    String listaT = "TRABAJADORES REGISTRADOS:\n\n";
 
                     for (Trabajador t : trabajadores) {
 
-                        listaT = listaT + "Nombre: " + t.getNombre() + "\n";
-                        listaT = listaT + "ID: " + t.getIdPersona() + "\n";
-                        listaT = listaT + "Horas: " + t.getHoras() + "\n";
-                        if (t.isAsistencia()) {
-                            listaT = listaT + "Asistencia: Sí\n";
-                        }else{
-                            listaT = listaT + "Asistencia: No\n";
-                        }
-                        listaT = listaT + "-------------------------------------\n";
+                        listaT += "Nombre: " + t.getNombre() + "\n";
+                        listaT += "ID: " + t.getIdPersona() + "\n";
+                        listaT += "Horas: " + t.getHoras() + "\n";
+                        listaT += "Asistencia: " + (t.isAsistencia() ? "Sí" : "No") + "\n";
+                        listaT += "-------------------------------------\n";
                     }
 
-
-                    JOptionPane.showMessageDialog(null, listaT.toString());
+                    JOptionPane.showMessageDialog(null, listaT);
                     break;
 
                 case "6":
@@ -215,8 +196,7 @@ JOptionPane.showMessageDialog(null, listaP);
         }
     }
 
-    //menú para trabajador
-    
+    // MENÚ TRABAJADOR
     public static void menuTrabajador(ArrayList<cliente> clientes, Inventario inventario) {
 
         while (true) {
@@ -230,16 +210,16 @@ JOptionPane.showMessageDialog(null, listaP);
                     "3. Volver"
             );
 
-            if (op == null) return;
+            if (op == null) continue;
 
             switch (op) {
 
                 case "1":
                     String n = JOptionPane.showInputDialog("Nombre cliente:");
-                    if (n == null || n.trim().isEmpty()) break;
+                    if (n == null || n.trim().isEmpty()) continue;
 
                     String id = JOptionPane.showInputDialog("ID:");
-                    if (id == null || id.trim().isEmpty()) break;
+                    if (id == null || id.trim().isEmpty()) continue;
 
                     clientes.add(new cliente(3, n, id));
                     JOptionPane.showMessageDialog(null, "Cliente registrado.");

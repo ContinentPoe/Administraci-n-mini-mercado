@@ -54,7 +54,7 @@ public class Menu {
     }
 
     // MOSTRAR TRABAJADORs
-    
+
     public static void mostrarTrabajadores() {
         if (trabajadores.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay trabajadores registrados.");
